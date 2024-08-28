@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,5 +27,13 @@ public class FileController {
         Optional<FileGetDto> fileEntityOptional = fileService.getFile(id);
 
         return fileEntityOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<List<FileGetDto>> getAllFiles(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize) {
+
+        return ResponseEntity.ok(fileService.getAllFiles(pageNumber, pageSize));
     }
 }
