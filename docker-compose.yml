@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    container_name: file-storage-db
+    restart: always
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DB
+    ports:
+      - '5432:5432'
+
+  app:
+    container_name: file-storage-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    env_file: ./.env
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/$SPRING_DATASOURCE_DB
+      - SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME
+      - SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - db
