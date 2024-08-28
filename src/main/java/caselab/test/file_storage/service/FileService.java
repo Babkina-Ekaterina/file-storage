@@ -34,8 +34,7 @@ public class FileService {
         return Optional.empty();
     }
 
-    public List<FileGetDto> getAllFiles(int pageNumber, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("creationDate").descending());
+    public List<FileGetDto> getAllFiles(Pageable pageable) {
 
         List<FileGetDto> fileGetDtoList = fileRepository.findAll(pageable).stream()
                 .map(fileMapper::fileEntityToFileGetDto)
