@@ -83,7 +83,7 @@ docker-compose up
 ```json
 {
   "title": "Sample File",
-  "creationDate": "28-08-2024 09:40:34",
+  "creationDate": "2024-08-28T21:12:55.501733",
   "description": "This is a sample file",
   "fileContent": "Base64 encoded content"
 }
@@ -104,7 +104,7 @@ docker-compose up
 [
   {
     "title": "Sample File",
-    "creationDate": "28-08-2024 09:40:34",
+    "creationDate": "2024-08-28T21:12:55.501733",
     "description": "This is a sample file",
     "fileContent": "Base64 encoded content"
   }
