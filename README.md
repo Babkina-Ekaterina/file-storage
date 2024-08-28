@@ -45,7 +45,7 @@ GitHub или скачайте код в ввиде архива);
 3. Убедитесь, что Docker и Docker Compose установлены на Вашем компьютере;
 4. В терминале выполните команду для сборки и запуска Docker-контейнеров:
 ```
-docker compose up
+docker-compose up
 ```
 Приложение будет запущено локально на порте 8080.
 
@@ -107,7 +107,6 @@ docker compose up
     "creationDate": "28-08-2024 09:40:34",
     "description": "This is a sample file",
     "fileContent": "Base64 encoded content"
-  },
-  ...
+  }
 ]
 ```
