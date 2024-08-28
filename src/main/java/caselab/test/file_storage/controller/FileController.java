@@ -1,13 +1,13 @@
 package caselab.test.file_storage.controller;
 
 import caselab.test.file_storage.data.dto.FileCreateDto;
+import caselab.test.file_storage.data.dto.FileGetDto;
 import caselab.test.file_storage.service.FileService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/file-storage")
@@ -21,4 +21,10 @@ public class FileController {
         return ResponseEntity.ok(id);
     }
 
+    @GetMapping("/get")
+    public ResponseEntity<FileGetDto> getFile(@RequestParam Long id) {
+        Optional<FileGetDto> fileEntityOptional = fileService.getFile(id);
+
+        return fileEntityOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
