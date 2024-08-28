@@ -4,6 +4,9 @@ import caselab.test.file_storage.data.dto.FileCreateDto;
 import caselab.test.file_storage.data.dto.FileGetDto;
 import caselab.test.file_storage.service.FileService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +36,7 @@ public class FileController {
     public ResponseEntity<List<FileGetDto>> getAllFiles(
             @RequestParam(defaultValue = "0") int pageNumber,
             @RequestParam(defaultValue = "10") int pageSize) {
-
-        return ResponseEntity.ok(fileService.getAllFiles(pageNumber, pageSize));
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("creationDate").descending());
+        return ResponseEntity.ok(fileService.getAllFiles(pageable));
     }
 }
